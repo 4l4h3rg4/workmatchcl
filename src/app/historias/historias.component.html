@@ -1,0 +1,16 @@
+<div class="stories-container">
+  <div class="story add-story" (click)="uploadStory()">
+    <div class="story-ring add-ring">
+      <ion-icon name="add-circle"></ion-icon>
+    </div>
+    <div class="story-title">Tu historia</div>
+  </div>
+
+  <!-- Historias agrupadas -->
+  <div class="story" *ngFor="let userName of groupedStories | keyvalue" (click)="openStory(userName.key)">
+    <div class="story-ring">
+      <img [src]="groupedStories[userName.key][0].userAvatar" alt="avatar">
+    </div>
+    <div class="story-title">{{ userName.key }}</div>
+  </div>
+</div>

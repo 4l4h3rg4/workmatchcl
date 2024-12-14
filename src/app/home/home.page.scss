@@ -1,0 +1,99 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+.post-trabajos {
+  column-count: 2; /* Divide en 2 columnas */ 
+  column-gap: 10px; /* Espacio entre columnas */ 
+} 
+  
+.post { 
+  margin-bottom: 10px; /* Espacio entre posts verticalmente */ 
+  border-radius: 10px; 
+  overflow: hidden; 
+  width: 100%; /* Asegura que el post ocupe toda la columna */ 
+  box-sizing: border-box; 
+} 
+  
+.post img { 
+  width: 100%; 
+  height: auto; 
+  display: block; 
+  object-fit: cover; 
+}
+
+.new-post-button {
+  position: absolute;
+  bottom: 100px; /* Ajusta la posición vertical según sea necesario */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; /* O ajusta el ancho según prefieras */
+  max-width: 400px; /* Ancho máximo del botón */
+  z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+ion-footer {
+  background-color: #1c2636; // Color de fondo del footer
+}
+
+ion-tab-button {
+  color: white; // Color del texto de los botones
+}
+
+ion-tab-button[tab="new-post"] {
+  --color-selected: #3498db; // Color cuando el botón está seleccionado
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas por defecto */
+  gap: 16px; /* Espacio entre los posts */
+  padding: 16px;
+}
+
+.post {
+  background-color: #000000;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+}
+
+.post-info {
+  padding: 8px;
+}
+
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas pequeñas */
+  }
+}

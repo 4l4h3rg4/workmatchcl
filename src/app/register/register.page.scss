@@ -1,0 +1,143 @@
+ion-content {
+  --background: #1c2636;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.progress-bar {
+  margin-bottom: 30px;
+}
+
+h1, h2, h3 {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.step {
+  width: 100%;
+}
+
+.custom-item {
+  --background: #2c3e50;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  width: 100%;
+
+  ion-label {
+    --color: #95a5a6;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+  }
+
+  ion-input, ion-textarea {
+    --color: white;
+    --padding-start: 15px;
+    --padding-end: 15px;
+    font-size: 16px;
+  }
+}
+
+.checkbox-group {
+  margin: 20px 0;
+  color: white;
+
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+.radio-group {
+  margin: 20px 0;
+  color: white;
+}
+
+ion-item {
+  --background: transparent;
+  --color: white;
+}
+
+ion-select {
+  --color: white;
+  --interface: popover;
+}
+
+ion-checkbox, ion-radio {
+  margin-right: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button-group-single {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+ion-button {
+  --background: #34495e;
+  --border-radius: 5px;
+  width: 48%;
+  margin: 5px 0;
+
+  &.ready {
+    --background: #2ecc71; // Cambia de color cuando está listo
+  }
+}
+
+.login-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+
+  a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+  }
+}
+
+.profile-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  ion-icon {
+    font-size: 60px;
+    color: #95a5a6;
+    margin-right: 10px;
+  }
+
+  .photo-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+}

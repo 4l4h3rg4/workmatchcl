@@ -1,0 +1,15 @@
+<ion-content (touchend)="handleTouch($event)">
+  <div class="story-viewer">
+    <div class="progress-bar">
+      <div class="progress" [ngStyle]="getProgressStyle(currentStory)"></div>
+    </div>
+    <div class="user-info">
+      <img [src]="currentStory.userAvatar" alt="avatar" class="avatar">
+      <span class="user-name">{{ currentStory.userName }}</span>
+      <span class="upload-time">{{ currentStory.expiration | date:'shortTime' }}</span>
+    </div>
+    <img [src]="currentStory.imageUrl" class="story-image">
+    <button class="nav-button left" (click)="prevStory()">&#9664;</button>
+    <button class="nav-button right" (click)="nextStory()">&#9654;</button>
+  </div>
+</ion-content>

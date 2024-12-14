@@ -1,0 +1,363 @@
+.container{
+  max-width: 2000px;
+  padding: 0 100px;
+  background-color: #181e21;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px;
+  background-color: #181e21;
+  color: #ffffff;
+  border-radius: 8px;
+  position: relative;
+  /* flex-wrap: wrap; */ /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+
+.profile-avatar {
+  position: relative;
+  width: 250px; /* Aumenta el tamaño del avatar */
+  height: 250px;
+  border-radius: 50%;
+  border: 2px solid #00bfa5;
+  flex-shrink: 0; /* Evita que el avatar se reduzca en pantallas pequeñas */
+}
+
+.edit-avatar {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: #00bfa5;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 60px; /* Ajusta el tamaño del botón */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.edit-avatar ion-icon {
+  font-size: 20px; /* Ajusta el tamaño del icono */
+}
+
+.profile-info {
+  flex-grow: 1;
+  margin-left: 20px;
+  font-size: 20px; /* Aumenta el tamaño de la fuente */
+  min-width: 200px; /* Asegura un ancho mínimo para evitar que se amontone */
+}
+
+.social-icons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.social-icons ion-icon {
+  margin: 0 5px;
+  font-size: 24px;
+  color: #00bfa5;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #181e21;
+  color: #ffffff;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 10px;
+  background-color: #2a3338;
+  border-radius: 8px;
+  width: 20%; /* Ajusta el ancho para distribuir los elementos */
+  box-sizing: border-box;
+}
+
+.info-item ion-icon {
+  margin-right: 10px;
+  color: #00bfa5;
+}
+
+.info-item p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.edit-profile {
+  color: #ffffff;
+  font-size: 16px; /* Aumenta el tamaño de la fuente del botón */
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin-top: 10px; /* Añade margen superior para separación */
+}
+
+.menu-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #181e21;
+  color: #ffffff;
+  flex-wrap: wrap;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+  margin: 5px;
+  padding: 10px;
+  background-color: #2a3338;
+  border-radius: 8px;
+  border: 1px solid #3a444a;
+  box-sizing: border-box;
+  min-width: 120px; /* Asegura un tamaño mínimo */
+}
+
+.stat h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #000;
+}
+
+.stat p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.skills-section {
+  padding: 20px;
+  background-color: #181e21;
+  color: #ffffff;
+}
+
+.skills ion-label {
+  display: inline-block;
+  background-color: #00bfa5;
+  color: #ffffff;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+ion-segment {
+  height: 40px;
+  margin: 20px 0;
+  background-color: #1f262a;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+ion-segment-button {
+  --color-checked: #ffffff;
+  --background: transparent;
+  font-size: 20px;
+}
+
+.post-trabajos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly ;
+  padding: 20px;
+}
+
+.post {
+  width: 18%; /* Ajusta el ancho para 5 posts en fila en PC */
+  margin-bottom: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #181e21;
+}
+
+.image-container {
+  position: relative;
+}
+
+.post img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
+.post-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  padding: 10px;
+  text-align: left;
+  min-height: 60px;
+}
+
+.post h3 {
+  margin: 0;
+  padding: 0 5px;
+  font-size: 18px;
+  bottom: 0;
+}
+
+.post p {
+  margin: 5px 0;
+  padding: 0 5px;
+  font-size: 15px;
+  max-height: 100px; /* Limita la altura máxima */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-details {
+  display: flex;
+  padding: 0 5px;
+  align-items: center;
+  font-size: 12px;
+  bottom: 0;
+}
+
+.post-details ion-icon {
+  margin-right: 5px;
+  bottom: 0;
+  width: 25px;
+  height: 25px;
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    width: 140px;
+    height: 140px;
+  }
+
+  .edit-avatar {
+    width: 50px; /* Ajusta el tamaño del botón en móvil */
+    height: 50px;
+  }
+
+  .edit-avatar ion-icon {
+    font-size: 16px; /* Ajusta el tamaño del icono en móvil */
+  }
+
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .social-icons ion-icon {
+    margin: 0 5px;
+    font-size: 24px;
+    color: #00bfa5;
+  }
+  
+  .profile-info h1 {
+    font-size: 30px; /* Aumenta el tamaño del nombre */
+    font-weight: bold;
+  }
+  
+  .profile-info p {
+    margin: 5px 0;
+    text-align: center;
+  }
+  
+  .profile-info ion-icon {
+    margin-right: 5px;
+  }
+
+  .info-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    background-color: #181e21;
+    color: #ffffff;
+  }
+
+  .info-item.empty {
+    display: none;
+  }
+
+  .info-item {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    padding: 10px;
+    background-color: #2a3338;
+    border-radius: 8px;
+    width: 80%; /* Dos items por fila */
+    box-sizing: border-box;
+  }
+
+  .info-item ion-icon {
+    margin-right: 10px;
+    color: #00bfa5;
+  }
+
+  .info-item p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .edit-profile {
+    margin-top: 10px; /* Mueve el botón debajo de la descripción */
+    background-color: none;
+  }
+
+  .stat {
+    flex: 1 1 45%; /* Permite que dos stats se alineen en una fila en móvil */
+  }
+
+  ion-segment-button {
+    font-size: 18px;
+  }
+
+  .post-trabajos {
+    display: flex;
+    flex-direction: column; /* Asegura que los posts se muestren en columna */
+    align-items: center; /* Centra los posts horizontalmente */
+  }
+
+  .post {
+    width: 100%; /* Asegura que los posts ocupen todo el ancho en móvil */
+    margin: 10px 0;
+    border-radius: 20px;
+  }
+}

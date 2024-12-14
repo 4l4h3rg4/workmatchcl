@@ -1,0 +1,48 @@
+<ion-content>
+  <ion-list lines="none" id="chat-list">
+    <ion-item *ngFor="let chat of chats" (click)="openChatById(chat.id)" class="chat-item">
+      <ion-avatar slot="start">
+        <img [src]="chat.photoURL || 'assets/img/default-avatar.png'" alt="Avatar" />
+      </ion-avatar>
+      <ion-label class="chat-label">
+        <h2>{{ chat.otherParticipantName || 'Usuario' }}</h2>
+        <p *ngIf="chat.lastMessage">{{ chat.lastMessage }}</p>
+      </ion-label>
+      <ion-badge *ngIf="chat.unreadCount > 0" color="tertiary" slot="end">{{ chat.unreadCount }}</ion-badge>
+    </ion-item>
+  </ion-list>
+  
+  <ion-modal [isOpen]="selectedChat !== null" (didDismiss)="closeChat()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ selectedChat?.otherParticipant || 'Chat' }}</ion-title>
+            <ion-buttons slot="end">
+            <ion-button (click)="closeChat()">
+              <ion-icon name="close" size="large"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list lines="none" id="chat-window">
+          <ion-item *ngFor="let message of selectedChat?.messages" [ngClass]="{'sent': message.senderId === currentUserId, 'received': message.senderId !== currentUserId}">
+            <ion-label>
+              <p>{{ message.content }}</p>
+              <small>{{ message.timestamp | date:'shortTime' }}</small> <!-- Asegúrate de que message.timestamp es un Date -->
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+
+      <ion-footer id="message-input">
+        <ion-item>
+          <ion-input [(ngModel)]="newMessage" placeholder="Escribe un mensaje..."></ion-input>
+          <ion-button (click)="sendMessage()">Enviar</ion-button>
+        </ion-item>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+<app-footer></app-footer> <!-- Añade el footer aquí -->

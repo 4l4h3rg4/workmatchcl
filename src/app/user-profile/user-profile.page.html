@@ -1,0 +1,129 @@
+<ion-content>
+  <div class="profile-header">
+    <ion-avatar class="profile-avatar">
+      <img alt="foto perfil" [src]="userData.photoURL || 'assets/img/foto-perfil1.jpg'" />
+    </ion-avatar>
+    <div class="profile-info">
+      <h1>{{ userData.name || 'usuario' }}</h1>
+      <p>{{ userData.bio || 'Soy una historia que jamás puede ser superada. Apasionado por crear soluciones innovadoras y experiencias de usuario excepcionales.' }}</p>
+      <div class="social-icons">
+        <ion-icon name="mail-outline" (click)="openLink('email')"></ion-icon>
+        <ion-icon name="logo-linkedin" (click)="openLink('linkedin')"></ion-icon>
+        <ion-icon name="logo-github" (click)="openLink('github')"></ion-icon>
+      </div>
+
+      <div class="info-section">
+        <div class="info-item" [ngClass]="{'empty': !userData.specialization}">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          <p >{{ userData.specialization || '' }}</p>
+        </div>
+        <div class="info-item" [ngClass]="{'empty': !userData.location}">
+          <ion-icon name="location-outline"></ion-icon>
+          <p >{{ userData.location || '' }}</p>
+        </div>
+        <div class="info-item" [ngClass]="{'empty': !userData.workStyle}">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          <p>{{ userData.workStyle || '' }}</p>
+        </div>
+        <div class="info-item" [ngClass]="{'empty': !userData.education}">
+          <ion-icon name="school-outline"></ion-icon>
+          <p>{{ userData.education || '' }}</p>
+        </div>
+        <div class="info-item" [ngClass]="{'empty': !userData.languages}">
+          <ion-icon name="globe-outline"></ion-icon>
+          <p>{{ userData.languages || '' }}</p>
+        </div>
+        <div class="info-item" [ngClass]="{'empty': !userData.email}">
+          <ion-icon name="mail-outline"></ion-icon>
+          <p id="correo">{{ userData.email || '' }}</p>
+        </div>
+        <div class="info-item"[ngClass]="{'empty': !userData.experience}">
+          <ion-icon name="time-outline"></ion-icon>
+          <p>{{ userData.experience || '' }}</p>
+        </div>
+        <div class="info-item" [ngClass]="{'': !userData.available}">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <p>{{ userData.available ? 'Disponible para contratar' : 'No disponible para contratar' }}</p>
+        </div>
+      </div>
+      <ion-button (click)="toggleFollow()" [color]="isFollowing ? 'danger' : 'primary'">
+        {{ isFollowing ? 'Dejar de seguir' : 'Seguir' }}
+      </ion-button>
+      <ion-button (click)="startChat()" [color]="'primary'">
+        Iniciar Chat
+      </ion-button>
+    </div>
+    
+  </div>
+  
+  <div class="profile-stats">
+    <div class="stat">
+      <h2>{{ userData.followersCount || 0 }}</h2>
+      <p>Seguidores</p>
+    </div>
+    <div class="stat">
+      <h2>{{ userData.followingCount || 0 }}</h2>
+      <p>Siguiendo</p>
+    </div>
+    <div class="stat">
+      <h2>{{ userData.collaborationsCount || 0 }}</h2>
+      <p>Colaboraciones</p>
+    </div>
+    <div class="stat">
+      <h2>{{ userData.postsCount || 0 }}</h2>
+      <p>Posts</p>
+    </div>
+  </div>
+  
+  <div class="skills-section">
+    <h2>Habilidades</h2>
+    <div class="skills">
+      <ion-label *ngIf="userData.skills?.UXUI">Diseño UX/UI</ion-label>
+      <ion-label *ngIf="userData.skills?.Backend">Desarrollo Back-end</ion-label>
+      <ion-label *ngIf="userData.skills?.AppDesign">Diseño de Apps Móviles</ion-label>
+      <ion-label *ngIf="userData.skills?.Branding">Branding</ion-label>
+      <ion-label *ngIf="userData.skills?.Frontend">Desarrollo Front-end</ion-label>
+      <ion-label *ngIf="userData.skills?.MotionGraphics">Motion Graphics</ion-label>
+    </div>
+  </div>
+  
+  <ion-segment (ionChange)="cambiarContenido($event)">
+    <ion-segment-button value="trabajos" checked>
+      <ion-label>Posts</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="colaboraciones">
+      <ion-label>Colaboraciones</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  
+  <div *ngIf="contenidoActual === 'trabajos'" class="post-trabajos">
+    <div class="post" *ngFor="let post of userPosts; let i = index">
+      <div class="image-container">
+        <img [src]="post.images[currentImageIndex[i]]" alt="Imagen del post">
+        <div class="post-overlay">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.description }}</p>
+          <div class="post-details">
+            <ion-icon id="icon-like" name="heart-outline"></ion-icon> {{ post.likes }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="contenidoActual === 'colaboraciones'" class="post-trabajos">
+    <div class="post" *ngFor="let post of collaboratorPosts; let i = index">
+      <div class="image-container">
+        <img [src]="post.images[currentImageIndex[i]]" alt="Imagen del post">
+        <div class="post-overlay">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.description }}</p>
+          <div class="post-details">
+            <ion-icon name="heart-outline"></ion-icon> {{ post.likes }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<app-footer></app-footer>

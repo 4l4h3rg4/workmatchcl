@@ -1,0 +1,125 @@
+<ion-content [fullscreen]="true">
+  <!-- Encabezado principal con título de la página -->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Buscar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Menú lateral con categorías -->
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title class="TituloCategorias">Categorías</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <!-- Botones para diferentes categorías -->
+        <ion-item (click)="filtrarPorCategoria('Fotografía')">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          <ion-label>Fotografía</ion-label>
+        </ion-item>
+        <ion-item (click)="filtrarPorCategoria('Diseño Web')">
+          <ion-icon slot="start" name="globe"></ion-icon>
+          <ion-label>Diseño Web</ion-label>
+        </ion-item>
+        <ion-item (click)="filtrarPorCategoria('Diseño Gráfico')">
+          <ion-icon slot="start" name="brush"></ion-icon>
+          <ion-label>Diseño Gráfico</ion-label>
+        </ion-item>
+        <ion-item (click)="filtrarPorCategoria('Diseño de Aplicación')">
+          <ion-icon slot="start" name="phone-portrait"></ion-icon>
+          <ion-label>Diseño de Aplicación</ion-label>
+        </ion-item>
+        <ion-item (click)="filtrarPorCategoria('Programación')">
+          <ion-icon slot="start" name="code-slash"></ion-icon>
+          <ion-label>Programación</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Contenido principal desplazable -->
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button *ngIf="!categoriaSeleccionada"></ion-menu-button>
+          <ion-back-button *ngIf="categoriaSeleccionada" (click)="limpiarFiltro()" defaultHref="/buscar"></ion-back-button>
+        </ion-buttons>
+        <ion-title *ngIf="categoriaSeleccionada">{{ categoriaSeleccionada }}</ion-title>
+        <!-- Barra de búsqueda -->
+        <ion-searchbar *ngIf="!categoriaSeleccionada" 
+                       (ionInput)="buscar($event)" 
+                       placeholder="Buscar usuarios y posts..." 
+                       [debounce]="300">
+        </ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content>
+      <!-- Añade este contenedor para el spinner -->
+      <div class="spinner-container" *ngIf="cargando">
+        <ion-spinner></ion-spinner>
+      </div>
+      
+      <ion-text color="danger" *ngIf="error">{{ error }}</ion-text>
+
+      <!-- Resultados de búsqueda -->
+      <ng-container *ngIf="resultadosBusqueda | async as resultados">
+        <ion-list *ngIf="resultados.length > 0">
+          <ng-container *ngFor="let resultado of resultados">
+            <!-- Resultado de usuario -->
+            <ion-item *ngIf="resultado.tipo === 'usuario'" class="clickable-item" (click)="onItemClick(resultado)">
+              <ion-avatar slot="start">
+                <img [src]="resultado.datos.photoURL || 'assets/img/default-avatar.png'" alt="Avatar">
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ resultado.datos.name }}</h2>
+                <p>{{ resultado.datos.email }}</p>
+                <p>Especialización: {{ resultado.datos.specialization || 'No especificada' }}</p>
+              </ion-label>
+            </ion-item>
+         
+            <ion-item *ngIf="resultado.tipo === 'post'" class="clickable-item" (click)="onItemClick(resultado)">
+              <ion-thumbnail slot="start">
+                <img [src]="resultado.datos.images && resultado.datos.images.length > 0 ? resultado.datos.images[0] : 'assets/placeholder.jpg'">
+              </ion-thumbnail>
+              <ion-label>
+                <h2>{{ resultado.datos.title }}</h2>
+                <p>{{ resultado.datos.description }}</p>
+                <p>Categoría: {{ resultado.datos.category }}</p>
+                <p>Para: {{ resultado.datos.creatorName || 'sin resultados'}} </p>
+              </ion-label>
+            </ion-item>
+         
+          </ng-container>
+        </ion-list>
+      </ng-container>
+
+      <!-- Todos los posts -->
+      <div class="post-trabajos" *ngIf="!categoriaSeleccionada && !(resultadosBusqueda | async)?.length">
+        <h2 class="ion-padding" *ngIf="posts.length > 0">Todos los posts</h2>
+        <div class="posts-grid">
+          <div class="post clickable-item" *ngFor="let post of posts" (click)="verDetallePost(post.id)">
+            <div class="image-container"> 
+              <img [src]="post.images[0]" alt="Imagen del post" *ngIf="post.images && post.images.length > 0">
+            </div>
+            <div class="post-info">
+              <h3>{{ post.title }}</h3>
+              <h6>{{ post.category }}</h6>
+            </div>
+            <div class="item-overlay"></div>
+          </div>
+        </div>
+        <ion-text *ngIf="posts.length === 0 && !cargando && !error">
+          No hay posts para mostrar.
+        </ion-text>
+      </div>
+    </ion-content>
+  </div>
+</ion-content>
+
+<!-- Footer con pestañas de navegación -->
+<app-footer></app-footer>

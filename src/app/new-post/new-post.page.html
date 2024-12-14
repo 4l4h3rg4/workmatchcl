@@ -1,0 +1,105 @@
+<ion-content>
+  <div class="main-container">
+    <div *ngIf="currentStep === 1">
+      <h2>Paso 1: Imágenes</h2>
+      <div class="upload-container" (click)="fileInput.click()">
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+        <p>Haz clic para seleccionar imágenes o arrástralas aquí</p>
+        <input type="file" #fileInput (change)="onFileSelected($event)" multiple />
+      </div>
+
+      <div class="preview-container" *ngIf="selectedImages.length > 0">
+        <div class="image-preview" *ngFor="let img of selectedImages; let i = index" (click)="openImageModal(img)">
+          <img [src]="img" alt="Imagen seleccionada">
+          <ion-icon name="close-circle" class="remove-icon" (click)="removeImage(i)"></ion-icon>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <ion-button expand="full" (click)="nextStep()" *ngIf="selectedImages.length > 0">Siguiente</ion-button>
+      </div>
+    </div>
+
+    <div *ngIf="currentStep === 2">
+      <h2>Paso 2: Detalles</h2>
+      
+      <div class="image-preview-large" *ngIf="selectedImages.length > 0">
+        <div class="image-preview" *ngFor="let img of selectedImages">
+          <img [src]="img" alt="Vista previa de la imagen">
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Título</ion-label>
+        <ion-input [(ngModel)]="postTitle" placeholder="Título del post"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Descripción</ion-label>
+        <ion-textarea [(ngModel)]="postDescription" placeholder="Descripción del post"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Categoría</ion-label>
+        <ion-select [(ngModel)]="selectedCategory" placeholder="Selecciona una categoría">
+          <ion-select-option *ngFor="let category of categories" [value]="category">{{ category }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Habilidades / Tecnologías</ion-label>
+        <ion-input [(ngModel)]="newSkill" placeholder="Añadir habilidad"></ion-input>
+        <ion-button fill="clear" (click)="addSkill()">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      
+      <div class="skills-container">
+        <ion-chip *ngFor="let skill of skills">
+          <ion-label>{{ skill }}</ion-label>
+          <ion-icon name="close-circle" (click)="skills.splice(skills.indexOf(skill), 1)"></ion-icon>
+        </ion-chip>
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Cliente / Empresa</ion-label>
+        <ion-input [(ngModel)]="clientName" placeholder="Nombre del cliente o empresa"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Enlace al proyecto</ion-label>
+        <ion-input [(ngModel)]="projectLink" placeholder="https://..."></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Privacidad</ion-label>
+        <ion-select [(ngModel)]="privacy">
+          <ion-select-option value="publico">Público</ion-select-option>
+          <ion-select-option value="privado">Privado</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Colaboradores</ion-label>
+        <ion-input [(ngModel)]="collaboratorInput" (ionInput)="onCollaboratorInput($event)" placeholder="Menciona colaboradores con @"></ion-input>
+        <ion-list *ngIf="suggestions.length > 0">
+          <ion-item *ngFor="let suggestion of suggestions" (click)="selectCollaborator(suggestion)">
+            {{ suggestion.name }}
+          </ion-item>
+        </ion-list>
+      </ion-item>
+      <div class="collaborators-container">
+        <ion-chip *ngFor="let collaborator of collaboratorNames">
+          <ion-label>{{ collaborator.name }}</ion-label>
+          <ion-icon name="close-circle" (click)="removeCollaborator(collaborator.uid)"></ion-icon>
+        </ion-chip>
+      </div>
+
+      <div class="button-container">
+        <ion-button expand="full" (click)="previousStep()">Anterior</ion-button>
+        <ion-button expand="full" (click)="nextStep()">Publicar</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<app-footer></app-footer>

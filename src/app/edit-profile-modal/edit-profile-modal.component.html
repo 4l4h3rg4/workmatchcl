@@ -1,0 +1,103 @@
+<!-- src/app/edit-profile-modal/edit-profile-modal.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Información Personal -->
+    <div class="section personal-info">
+      <ion-item-divider>
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label id="info-personal">Información Personal</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input [(ngModel)]="userData.name"></ion-input>
+      </ion-item>
+    </div>
+
+    <!-- Ubicación y Trabajo -->
+    <div class="section location-work">
+      <ion-item-divider>
+        <ion-icon name="location-outline" class="color-icon"></ion-icon>
+        <ion-label class="nombres-sections">Ubicación y Trabajo</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">Ubicación</ion-label>
+        <ion-input [(ngModel)]="userData.location"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">Estilo de trabajo</ion-label>
+        <ion-select [(ngModel)]="userData.workStyle" [interfaceOptions]="workStyleAlert" interface="alert" placeholder="Seleccione uno">
+          <ion-select-option value="remoto">Remoto</ion-select-option>
+          <ion-select-option value="presencial">Presencial</ion-select-option>
+          <ion-select-option value="hibrido">Híbrido</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Educación y Habilidades -->
+    <div class="section education-skills">
+      <ion-item-divider>
+        <ion-icon name="school-outline" class="color-icon"></ion-icon>
+        <ion-label class="nombres-sections">Educación y Habilidades</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">Educación</ion-label>
+        <ion-input [(ngModel)]="userData.education"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">Idiomas (separados por coma)</ion-label>
+        <ion-input [(ngModel)]="userData.languages"></ion-input>
+      </ion-item>
+    </div>
+
+     <!-- Experiencia Profesional -->
+     <div class="section">
+      <ion-item-divider>
+        <ion-icon name="business-outline" class="color-icon"></ion-icon>
+        <ion-label class="nombres-sections" >Experiencia Profesional</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">Años de experiencia</ion-label>
+        <ion-select [(ngModel)]="userData.experience" placeholder="Seleccione uno">
+          <ion-select-option value="0-2 años">0-2 años</ion-select-option>
+          <ion-select-option value="3-5 años">3-5 años</ion-select-option>
+          <ion-select-option value="5+ años">5+ años</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+     <!-- Contacto y Disponibilidad -->
+     <div class="section">
+      <ion-item-divider>
+        <ion-icon name="call-outline" class="color-icon"></ion-icon>
+        <ion-label class="nombres-sections">Contacto y Disponibilidad</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">Correo Electrónico</ion-label>
+        <ion-input [(ngModel)]="userData.email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">Linkedin</ion-label>
+        <ion-input [(ngModel)]="userData.socialLinks.linkedin"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="nombres-sections">GitHub</ion-label>
+        <ion-input [(ngModel)]="userData.socialLinks.github"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label class="nombres-sections">Disponible para contratar</ion-label>
+        <ion-toggle id="ion-toggle" [(ngModel)]="userData.available">Default Toggle</ion-toggle>
+      </ion-item>
+    </div>
+
+  </ion-list>
+  <ion-button expand="full" (click)="save()">Guardar cambios</ion-button>
+</ion-content>

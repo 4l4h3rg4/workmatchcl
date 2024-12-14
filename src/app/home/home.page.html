@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Inicio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-historias></app-historias>
+
+  <ion-segment [(ngModel)]="categoriaSeleccionada" (ionChange)="filtrarPorCategoria(categoriaSeleccionada)">
+    <ion-segment-button value="todos">
+      Todos
+    </ion-segment-button>
+    <ion-segment-button value="Fotografía">
+      Fotografía
+    </ion-segment-button>
+    <ion-segment-button value="Diseño Web">
+      Diseño Web
+    </ion-segment-button>
+    <ion-segment-button value="Diseño Gráfico">
+      Diseño Gráfico
+    </ion-segment-button>
+    <ion-segment-button value="Diseño de Aplicación">
+      Diseño de Aplicación
+    </ion-segment-button>
+    <ion-segment-button value="Programación">
+      Programación
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="posts-grid">
+    <div class="post clickable-item" *ngFor="let post of postsFiltrados" (click)="verDetallePost(post.id)">
+      <div class="image-container">
+        <img [src]="post.images[0]" alt="Imagen del post" *ngIf="post.images && post.images.length > 0">
+      </div>
+      <div class="post-info">
+        <h3>{{ post.title }}</h3>
+        <h6>{{ post.category }}</h6>
+      </div>
+      <div class="item-overlay"></div>
+    </div>
+  </div>
+
+  <ion-text *ngIf="postsFiltrados.length === 0">
+    No hay posts para mostrar.
+  </ion-text>
+</ion-content>
+
+<app-footer></app-footer>

@@ -1,0 +1,205 @@
+ion-content {
+  --background: #19262e; /* Color de fondo general */
+}
+
+/* Estilos para la lista de chats */
+#chat-list {
+  background: transparent;
+}
+
+.chat-item {
+  --background: #1f2937;
+  margin: 8px 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+}
+
+.chat-label {
+  font-size: 1.2em; /* Ajusta el tamaño del texto */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente el texto dentro del label */
+}
+
+
+.chat-item ion-avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+.chat-item ion-label h2 {
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.chat-item ion-label p {
+  color: #666;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+ion-badge {
+  border-radius: 50%;
+  padding: 6px;
+  min-width: 20px;
+  font-size: 12px;
+  margin-left: auto; /* Asegura que el badge esté a la derecha */
+}
+
+/* Estilos para el modal de chat */
+ion-modal {
+  --height: 90%;
+  --border-radius: 16px 16px 0 0;
+}
+
+ion-modal ion-header {
+  background: #374151; /* Color estilo WhatsApp */
+}
+
+ion-modal ion-toolbar {
+  --background: #374151;
+  --color: white;
+}
+
+ion-modal ion-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Estilos para la ventana de mensajes */
+#chat-window {
+  padding: 10px;
+  background: #1f2937; /* Fondo estilo WhatsApp */
+}
+
+#chat-window ion-item {
+  --background: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 8px;
+}
+
+/* Estilos para los mensajes */
+.sent ion-label {
+  background: #0d9488; /* Color de mensaje enviado */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin: 5px 0;
+  max-width: 100%;
+  float: right;
+  clear: both;
+  position: relative;
+}
+
+.received ion-label {
+  background: #374151; /* Color de mensaje recibido */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin: 5px 0;
+  max-width: 100%;
+  float: left;
+  clear: both;
+  position: relative;
+}
+
+/* Estilos para la hora del mensaje */
+.sent small, .received small {
+  font-size: 11px;
+  color: #ffffff;
+  display: block;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.sent p, .received p {
+  color: white;
+}
+
+/* Área de entrada de mensaje */
+#message-input {
+  border-top: 1px solid #374151;
+  background: #374151;
+  padding: 5px;
+}
+
+#message-input ion-item {
+  --background: transparent;
+  --border-width: 0;
+  --padding-start: 10px;
+  --padding-end: 10px;
+}
+
+#message-input ion-input {
+  --background: #4b5563;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+#message-input ion-button {
+  --background: #0d9488;
+  --border-radius: 20px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  margin: 0;
+}
+
+/* Estilos para el scroll */
+ion-content::part(scroll) {
+  padding: 10px;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 576px) {
+  ion-modal {
+      --height: 100%;
+      --border-radius: 0;
+  }
+
+  .sent ion-label,
+  .received ion-label {
+      max-width: 100%;
+  }
+}
+
+/* Animaciones */
+.chat-item {
+  transition: transform 0.2s ease;
+}
+
+.chat-item:active {
+  transform: scale(0.98);
+}
+
+/* Estilos para el scroll personalizado */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* Efectos de hover */
+.chat-item:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+#message-input ion-button:hover {
+  --background: #054c44;
+}

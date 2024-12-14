@@ -1,0 +1,145 @@
+<ion-content>
+  <div class="register-container">
+    <h1>Únete a WorkMatch</h1>
+    <h2>Muestra tu portafolio creativo al mundo</h2>
+
+    <ion-progress-bar [value]="currentStep / totalSteps" class="progress-bar"></ion-progress-bar>
+
+    <!-- Paso 1: Información Básica -->
+    <div *ngIf="currentStep === 1" class="step">
+      <h3>Información Básica</h3>
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Nombre Completo</ion-label>
+        <ion-input [(ngModel)]="name" placeholder="Juan Pérez" required></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Correo Electrónico</ion-label>
+        <ion-input type="email" [(ngModel)]="email" placeholder="juan@ejemplo.com" required></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password" required></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Confirmar Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="confirmPassword" required></ion-input>
+      </ion-item>
+
+      <div class="button-group-single">
+        <ion-button [disabled]="!isStep1Valid()" [ngClass]="{'ready': isStep1Valid()}" (click)="nextStep()">Siguiente</ion-button>
+      </div>
+    </div>
+
+    <!-- Paso 2: Detalles Profesionales -->
+    <div *ngIf="currentStep === 2" class="step">
+      <h3>Detalles Profesionales</h3>
+
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Especialización Principal</ion-label>
+        <ion-select [(ngModel)]="specialization" interface="popover" placeholder="Selecciona tu área principal" required>
+          <ion-select-option value="fotografo">
+            <ion-icon name="camera-outline" slot="start"></ion-icon>
+            Fotógrafo
+          </ion-select-option>
+          <ion-select-option value="disenador">
+            <ion-icon name="color-palette-outline" slot="start"></ion-icon>
+            Diseñador Gráfico
+          </ion-select-option>
+          <ion-select-option value="programador">
+            <ion-icon name="code-slash-outline" slot="start"></ion-icon>
+            Programador
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="checkbox-group">
+        <h4>Habilidades (Selecciona todas las que apliquen)</h4>
+        <div class="checkbox-grid">
+          <ion-item lines="none" (click)="skillsUXUI = !skillsUXUI">
+            <ion-checkbox slot="start" [(ngModel)]="skillsUXUI"></ion-checkbox>
+            <ion-label>Diseño UI/UX</ion-label>
+          </ion-item>
+          <ion-item lines="none" (click)="skillsBackend = !skillsBackend">
+            <ion-checkbox slot="start" [(ngModel)]="skillsBackend"></ion-checkbox>
+            <ion-label>Desarrollo Back-end</ion-label>
+          </ion-item>
+          <ion-item lines="none" (click)="skillsAppDesign = !skillsAppDesign">
+            <ion-checkbox slot="start" [(ngModel)]="skillsAppDesign"></ion-checkbox>
+            <ion-label>Diseño de Apps Móviles</ion-label>
+          </ion-item>
+          <ion-item lines="none" (click)="skillsBranding = !skillsBranding">
+            <ion-checkbox slot="start" [(ngModel)]="skillsBranding"></ion-checkbox>
+            <ion-label>Branding</ion-label>
+          </ion-item>
+          <ion-item lines="none" (click)="skillsFrontend = !skillsFrontend">
+            <ion-checkbox slot="start" [(ngModel)]="skillsFrontend"></ion-checkbox>
+            <ion-label>Desarrollo Front-end</ion-label>
+          </ion-item>
+          <ion-item lines="none" (click)="skillsMotionGraphics = !skillsMotionGraphics">
+            <ion-checkbox slot="start" [(ngModel)]="skillsMotionGraphics"></ion-checkbox>
+            <ion-label>Motion Graphics</ion-label>
+          </ion-item>
+        </div>
+      </div>
+
+      <div class="radio-group">
+        <h4>Años de Experiencia</h4>
+        <ion-radio-group [(ngModel)]="experienceYears">
+          <ion-item lines="none" (click)="experienceYears = '0-2'">
+            <ion-radio slot="start" value="0-2"></ion-radio>
+            <ion-label>0-2 años</ion-label>
+          </ion-item>
+          <ion-item lines="none" (click)="experienceYears = '3-5'">
+            <ion-radio slot="start" value="3-5"></ion-radio>
+            <ion-label>3-5 años</ion-label>
+          </ion-item>
+          <ion-item lines="none" (click)="experienceYears = '5+'">
+            <ion-radio slot="start" value="5+"></ion-radio>
+            <ion-label>5+ años</ion-label>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      <div class="button-group">
+        <ion-button (click)="goBack()">Anterior</ion-button>
+        <ion-button [disabled]="!isStep2Valid()" [ngClass]="{'ready': isStep2Valid()}" (click)="nextStep()">Siguiente</ion-button>
+      </div>
+    </div>
+
+    <!-- Paso 3: Información del Portafolio -->
+    <div *ngIf="currentStep === 3" class="step">
+      <h3>Información del Portafolio</h3>
+      <div class="profile-photo">
+        <img *ngIf="photoPreview" [src]="photoPreview" alt="Vista previa de la foto" class="photo-preview" />
+        <ion-icon *ngIf="!photoPreview" name="person-circle-outline"></ion-icon>
+        <ion-button (click)="fileInput.click()">Subir foto</ion-button>
+        <input type="file" #fileInput (change)="onFileSelected($event)" hidden>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-label position="stacked">Biografía Profesional</ion-label>
+        <ion-textarea [(ngModel)]="bio" placeholder="Cuéntanos sobre ti y tu trabajo..." required></ion-textarea>
+      </ion-item>
+
+      <h4>Enlaces a Redes Sociales</h4>
+      <ion-item class="custom-item">
+        <ion-icon name="logo-linkedin" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="socialLinks.linkedin" placeholder="URL del Perfil de LinkedIn"></ion-input>
+      </ion-item>
+      <ion-item class="custom-item">
+        <ion-icon name="logo-github" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="socialLinks.github" placeholder="URL del Perfil de GitHub"></ion-input>
+      </ion-item>
+
+      <div class="button-group">
+        <ion-button (click)="goBack()">Anterior</ion-button>
+        <ion-button [disabled]="!isStep3Valid()" [ngClass]="{'ready': isStep3Valid()}" (click)="submit()">Finalizar</ion-button>
+      </div>
+    </div>
+
+    <p class="login-link">¿Ya tienes una cuenta? <a (click)="goToLogin()">Iniciar sesión</a></p>
+  </div>
+</ion-content>

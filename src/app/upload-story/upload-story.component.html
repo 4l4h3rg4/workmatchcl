@@ -1,0 +1,15 @@
+<ion-content>
+  <div class="upload-story-modal">
+    <h2>Add Your Story</h2>
+    <div *ngIf="!selectedImage; else preview" class="upload-container" (click)="fileInput.click()">
+      <ion-icon name="image-outline"></ion-icon>
+      <p>Click to upload an image</p>
+      <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" />
+    </div>
+    <ng-template #preview>
+      <img [src]="selectedImage" alt="Vista previa" class="preview-image">
+      <button (click)="removeImage()">Remove Image</button>
+    </ng-template>
+    <button (click)="shareStory()" [disabled]="!selectedImage">Share Your Story</button>
+  </div>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="navigateToHome()">
+          <ion-icon name="home"></ion-icon>
+          Inicio
+        </ion-tab-button>
+        <ion-tab-button  (click)="navigateToChats()">
+          <ion-icon name="chatbubbles"></ion-icon>
+          Mensajes
+        </ion-tab-button>
+        <ion-tab-button (click)="navigateToUsuario()">
+          <ion-icon name="person"></ion-icon>
+          Perfil
+        </ion-tab-button>
+        <ion-tab-button (click)="navigateToBuscar()">
+          <ion-icon name="search"></ion-icon>
+          <ion-label>Buscar</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="navigateToNewPost()">
+          <ion-icon name="add-circle"></ion-icon>
+          <ion-label>Nuevo Post</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
